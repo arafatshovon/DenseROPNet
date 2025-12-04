@@ -1,0 +1,175 @@
+# =============================================================================
+# ROP Detection Configuration File
+# =============================================================================
+# This file contains all configurable parameters for training and evaluation
+# of the DenseNet121-SE-RANB-DualPool model for ROP classification.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Data Configuration
+# -----------------------------------------------------------------------------
+data:
+  # Path to dataset root directory (containing class subdirectories)
+  data_dir: "/path/to/rop-dataset"
+  
+  # Class names (must match subdirectory names)
+  classes:
+    - "Normal"
+    - "Stage1"
+    - "Stage2"
+    - "Stage3"
+  
+  # Data split ratios
+  test_size: 0.2
+  val_size: 0.1
+  
+  # Random seed for reproducibility
+  random_state: 42
+  
+  # Image extensions to include
+  image_extensions:
+    - ".png"
+    - ".jpg"
+    - ".jpeg"
+
+# -----------------------------------------------------------------------------
+# Preprocessing Configuration
+# -----------------------------------------------------------------------------
+preprocessing:
+  # Target image size
+  image_size: [299, 299]
+  
+  # CLAHE parameters
+  clahe:
+    enabled: true
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+  
+  # Normalization value
+  normalization_value: 255.0
+  
+  # Data augmentation (training only)
+  augmentation:
+    enabled: true
+    horizontal_flip: true
+    vertical_flip: false
+    rotation_range: [-15, 15]
+    brightness_range: [0.8, 1.2]
+
+# -----------------------------------------------------------------------------
+# Model Configuration
+# -----------------------------------------------------------------------------
+model:
+  # Model name
+  name: "DenseNet121_SE_RANB_DualPool"
+  
+  # Input shape
+  input_shape: [299, 299, 3]
+  
+  # Number of output classes
+  num_classes: 4
+  
+  # Backbone configuration
+  backbone:
+    name: "DenseNet121"
+    weights: "imagenet"
+    freeze: false
+  
+  # SE block configuration
+  se_block:
+    ratio: 16
+  
+  # Classification head
+  head:
+    fc1_units: 512
+    fc2_units: 256
+    dropout_rate: 0.5
+    l2_regularization: 0.0001
+    activation: "swish"
+
+# -----------------------------------------------------------------------------
+# Training Configuration
+# -----------------------------------------------------------------------------
+training:
+  # Batch size
+  batch_size: 32
+  
+  # Number of epochs
+  epochs: 50
+  
+  # Optimizer settings
+  optimizer:
+    name: "adam"
+    learning_rate: 0.0001
+  
+  # Loss function
+  loss: "sparse_categorical_crossentropy"
+  
+  # Metrics
+  metrics:
+    - "accuracy"
+  
+  # Callbacks
+  callbacks:
+    early_stopping:
+      enabled: true
+      monitor: "val_loss"
+      patience: 10
+      restore_best_weights: true
+    
+    reduce_lr:
+      enabled: true
+      monitor: "val_loss"
+      factor: 0.5
+      patience: 5
+      min_lr: 0.000001
+    
+    model_checkpoint:
+      enabled: true
+      monitor: "val_loss"
+      save_best_only: true
+    
+    tensorboard:
+      enabled: true
+
+# -----------------------------------------------------------------------------
+# Output Paths
+# -----------------------------------------------------------------------------
+output:
+  # Directory for saving models
+  model_dir: "checkpoints"
+  
+  # Best model filename
+  best_model_name: "best_model.keras"
+  
+  # Directory for logs
+  log_dir: "logs"
+  
+  # Training history CSV
+  history_csv: "training_history.csv"
+  
+  # Directory for evaluation outputs
+  eval_dir: "results"
+  
+  # Figure outputs
+  figures_dir: "results/figures"
+
+# -----------------------------------------------------------------------------
+# Evaluation Configuration
+# -----------------------------------------------------------------------------
+evaluation:
+  # Batch size for evaluation
+  batch_size: 32
+  
+  # Metrics to compute
+  compute_roc: true
+  compute_confusion_matrix: true
+  generate_classification_report: true
+  
+  # Explainability
+  explainability:
+    enabled: true
+    num_samples_lime: 1000
+    num_features_lime: 5
+    num_examples: 5
+
