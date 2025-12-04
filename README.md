@@ -39,43 +39,43 @@ The system achieves **99.75% validation accuracy** on ROP fundus image classific
 ```
 ROP/
 ├── 📂 configs/
-│   └── config.yaml           # Training and model configuration
-├── 📂 figures/               # Architecture diagrams and result figures
+│   └── config.yaml           
+├── 📂 figures/               
 │   ├── model.png
 │   ├── se2.png
 │   ├── ranb.png
 │   ├── clahe.png
 │   ├── cm_densenet.png
 │   └── grad1.png
-├── 📂 notebooks/             # Jupyter notebooks for exploration
+├── 📂 notebooks/             
 │   ├── rop-detection.ipynb
 │   └── rop-detection_clache.ipynb
-├── 📂 paper/                 # Research paper
+├── 📂 paper/                 
 │   └── ROP_Detection_Paper.pdf
-├── 📂 scripts/               # Shell scripts for training/evaluation
+├── 📂 scripts/               
 │   ├── setup.sh
 │   ├── train.sh
 │   ├── evaluate.sh
 │   └── predict.sh
-├── 📂 src/                   # Source code modules
+├── 📂 src/                   
 │   ├── 📂 data/
 │   │   ├── __init__.py
-│   │   ├── dataloader.py     # Data loading utilities
-│   │   └── preprocessing.py  # CLAHE and image preprocessing
+│   │   ├── dataloader.py     
+│   │   └── preprocessing.py  
 │   ├── 📂 models/
 │   │   ├── __init__.py
-│   │   └── densenet_se.py    # Model architecture
+│   │   └── densenet_se.py    
 │   ├── 📂 utils/
 │   │   ├── __init__.py
-│   │   ├── callbacks.py      # Training callbacks
-│   │   ├── explainability.py # Grad-CAM and LIME
-│   │   ├── metrics.py        # Evaluation metrics
-│   │   └── visualization.py  # Plotting utilities
+│   │   ├── callbacks.py      
+│   │   ├── explainability.py 
+│   │   ├── metrics.py        
+│   │   └── visualization.py  
 │   └── __init__.py
-├── train.py                  # Training script
-├── evaluate.py               # Evaluation script
-├── predict.py                # Inference script
-├── requirements.txt          # Python dependencies
+├── train.py                  
+├── evaluate.py               
+├── predict.py                
+├── requirements.txt          
 ├── .gitignore
 └── README.md
 ```
@@ -104,7 +104,7 @@ cd ROP-Detection
 Or manually:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -201,14 +201,12 @@ Grad-CAM visualizations show that the model focuses on clinically relevant regio
 Edit `configs/config.yaml` to customize:
 
 ```yaml
-# Data settings
 data:
   data_dir: "/path/to/data"
   classes: ["Normal", "Stage1", "Stage2", "Stage3"]
   test_size: 0.2
   val_size: 0.1
 
-# Model settings
 model:
   input_shape: [299, 299, 3]
   num_classes: 4
@@ -216,7 +214,7 @@ model:
     name: "DenseNet121"
     weights: "imagenet"
 
-# Training settings
+
 training:
   batch_size: 32
   epochs: 50
