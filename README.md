@@ -272,11 +272,11 @@ def dual_global_pooling(input_tensor):
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{rop_detection_2024,
-  title={DenseNet121-SE-RANB-DualPool: A Deep Learning Framework for ROP Detection},
-  author={Arafat},
-  year={2024},
-  note={GitHub Repository}
+@article{rop_detection_2025,
+  title={Detection and Classification of Retinopathy of Prematurity on Multi-Source Fundus Images Using DenseROPNet},
+  author={Sadad Hasan, Yasir Arafat Prodhan, Dr. Imamul Hasan Bhuiyan},
+  journal={[2025 IEEE International Biomedical Instrumentation and Technology Conference]},
+  year={2025}
 }
 ```
 
@@ -296,11 +296,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📧 Contact
 
-For questions or collaborations, please open an issue or contact the author.
+ - Email: arafatshovon1897@gmail.com
+ - GitHub: [@arafatshovon](https://github.com/arafatshovon)
 
 ---
-
-<p align="center">
-  Made with ❤️ for advancing ROP diagnosis
-</p>
 
